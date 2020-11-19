@@ -30,6 +30,7 @@ class CountryBloc extends Bloc<CountryEvent, CountryState> {
       final input = event.name.toString();
       yield CountryLoadInProgress();
       final country = await getCountryByName(Params(name: input));
+
       yield* _mapGetCountryByNameToState(country);
     }
   }

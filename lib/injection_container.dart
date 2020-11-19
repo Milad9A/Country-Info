@@ -1,3 +1,5 @@
+import 'package:chopper_test/features/country/data/services/country_service.dart';
+
 import 'features/country/data/datasources/country_remote_data_source.dart';
 import 'features/country/data/repositories/country_repository.dart';
 import 'features/country/domain/repositories/country_repository.dart';
@@ -20,8 +22,10 @@ Future<void> init() async {
   );
 
   sl.registerLazySingleton<CountryRemoteDataSource>(
-    () => CountryRemoteDataSourceImpl(client: sl()),
+    // () => CountryRemoteDataSourceImpl(client: sl()),
+    () => CountryRemoteDataSourceImpl(countryService: sl()),
   );
 
-  sl.registerLazySingleton(() => http.Client());
+  // sl.registerLazySingleton(() => http.Client());
+  sl.registerLazySingleton(() => CountryService.create());
 }
